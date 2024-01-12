@@ -1,8 +1,8 @@
 import Formfield from "./Formfield.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 
-function Home () {
+function Form () {
 
     // LOGO UPLOADEN? FACTUURGEGEVENS => naam, adres, GEGEVENS BEDRIJF => naam, adres, telefoonnr, bankrekeningnr, kvk nr, btw nr
 // datum, factuurnummer
@@ -28,14 +28,37 @@ function Home () {
     const [customerCity, setCustomerCity] = useState('');
 
     // product op invoice
-    const [amount, setAmount] = useState(0);
-    const [productName, setProductName] = useState(0);
-    const [vat, setVat] = useState();
+    const [products, setProducts] = useState([]);
+    const [amount, setAmount] = useState(1);
+    const [productName, setProductName] = useState('');
+    const [vat, setVat] = useState('');
+    const [price, setPrice] = useState(0);
 
+    useEffect(() => {
+        console.log(products)
+    }, [products]);
+
+
+    const addProduct = () => {
+        const newProduct = {
+            name: productName,
+            amount: amount,
+            vat: vat,
+            price: price
+        }
+        // console.log(products);
+        setProducts([...products, newProduct]);
+        // console.log(products);
+
+        setProductName('');
+        setAmount(1);
+        setVat('');
+        setPrice(0);
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log("Factuur wordt gemaakt");
+        console.log("De gegevens worden in de factuur gezet ");
     }
 
     return (
@@ -146,23 +169,25 @@ function Home () {
                     </div>
 
                     <div className="addProduct">
+
                         <Formfield
-                            labelName="Naam product of dienst"
-                            type="text"
-                            placeholder="Naam product of dienst"
-                            value={customerCity}
-                            onChange={(e) => setCustomerCity(e.target.value)}
+                            labelName="Aantal"
+                            type="number"
+                            // placeholder="1"
+                            value={amount}
+                            onChange={(e) => setAmount(e.target.value)}
                         />
 
                         <Formfield
                             labelName="Naam product of dienst"
                             type="text"
                             placeholder="Naam product of dienst"
-                            value={customerCity}
-                            onChange={(e) => setCustomerCity(e.target.value)}
+                            value={productName}
+                            onChange={(e) => setProductName(e.target.value)}
                         />
 
                         <section>
+                            <label htmlFor="BtwPercentage">Btw percentage</label>
                             <select
                                 name="vat"
                                 id="vat"
@@ -174,6 +199,18 @@ function Home () {
                                 <option value="0">0%</option>
                             </select>
                         </section>
+
+                        <Formfield
+                            labelName="Prijs"
+                            type="number"
+                            placeholder="0"
+                            value={price}
+                            onChange={(e) => setPrice(e.target.value)}
+                        />
+
+                        <button onClick={addProduct}>Product toevoegen</button>
+
+
                     </div>
 
                 </form>
@@ -182,4 +219,4 @@ function Home () {
     )
 }
 
-export default Home;
+export default Form;

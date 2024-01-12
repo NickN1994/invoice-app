@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import './App.css'
 import {Route, Routes} from "react-router-dom";
-import Home from "./Home.jsx";
+import Form from "./Form.jsx";
 import Factuur from "./Factuur.jsx";
 
 // LOGO UPLOADEN? FACTUURGEGEVENS => naam, adres, GEGEVENS BEDRIJF => naam, adres, telefoonnr, bankrekeningnr, kvk nr, btw nr
@@ -17,7 +17,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Home/>}/>
+      <Route path="/" element={<Form/>}/>
       <Route path="/factuur" element={<Factuur/>}/>
     </Routes>
   )
