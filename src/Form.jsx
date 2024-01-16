@@ -34,7 +34,7 @@ function Form() {
     const [products, setProducts] = useState([]);
     const [amount, setAmount] = useState(1);
     const [productName, setProductName] = useState('');
-    const [vat, setVat] = useState('');
+    const [vat, setVat] = useState(21);
     const [price, setPrice] = useState(0);
 
     useEffect(() => {
@@ -47,7 +47,7 @@ function Form() {
             name: productName,
             amount: amount,
             vat: vat,
-            priceUnit: calcPriceUnitHelper(price, vat),
+            priceNoVat: calcPriceUnitHelper(price, vat),
             price: price
         }
         // console.log(products);
@@ -56,7 +56,7 @@ function Form() {
 
         setProductName('');
         setAmount(1);
-        setVat('');
+        setVat(21);
         setPrice(0);
     }
 
@@ -232,6 +232,7 @@ function Form() {
                     />
 
                     <button onClick={addProduct}>Product toevoegen</button>
+                </div>
 
                     {/*     DE FACTUUR      */}
                     {/*     KLANT GEGEVENS  */}
@@ -258,6 +259,7 @@ function Form() {
                             <p><strong>Factuurnummer:</strong> {invoiceNumber}</p>
                         </section>
                         <section>
+                            {/* PRODUCTEN OP FACTUUR    */}
                             <div>
                                 <p><strong>Beschrijving</strong></p>
                                 {products && products.map((product) => {
@@ -278,33 +280,13 @@ function Form() {
                                     )
                                 })}
                             </div>
-                            <div>
-                                <p><strong>Prijs per eenheid</strong></p>
-                                {products && products.map((product) => {
-                                    return (
-                                        <>
-                                            <p>{product.priceUnit}</p>
-                                        </>
-                                    )
-                                })}
-                            </div>
+
                             <div>
                                 <p><strong>Prijs excl. Btw</strong></p>
                                 {products && products.map((product) => {
                                     return (
                                         <>
-                                            <p>{product.priceUnit}</p>
-                                        </>
-                                    )
-                                })}
-                            </div>
-
-                            <div>
-                                <p><strong>Btw</strong></p>
-                                {products && products.map((product) => {
-                                    return (
-                                        <>
-                                            <p>{product.priceUnit * product.amount}</p>
+                                            <p>{product.priceNoVat * product.amount}</p>
                                         </>
                                     )
                                 })}
@@ -320,9 +302,37 @@ function Form() {
                                     )
                                 })}
                             </div>
+
+                            <div>
+                                <p><strong>Prijs incl. Btw</strong></p>
+                                {products && products.map((product) => {
+                                    return (
+                                        <>
+                                            <p>{product.price * product.amount}</p>
+                                        </>
+                                    )
+                                })}
+                            </div>
                         </section>
 
-                    </div>
+                        {/* HELPER AANMAKEN NOG OM SUBTOTAAL ETC. TE BEREKENEN*/}
+
+                        <div>
+                            <section>
+                            <p><strong>Subtotaal: </strong></p>
+                            <p>€{}</p>
+                            </section>
+                            <section>
+                                <p><strong>Btw bedrag: </strong></p>
+                                <p>€{(products.price * products.amount) - (products.priceNoVat * products.amount)}</p>
+                            </section>
+                            <section>
+                                <p><strong>Totaal incl. btw: </strong></p>
+                                <p>€{(products.price * products.amount) - (products.priceNoVat * products.amount)}</p>
+                            </section>
+                        </div>
+
+                {/*    EINDE FACTUUR    */}
 
 
                 </div>
