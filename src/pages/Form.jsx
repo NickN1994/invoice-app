@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
-import Formfield from "./FormField.jsx";
-import calcPriceUnitHelper from "./calcPriceUnitHelper.js";
+import Formfield from "../components/FormField.jsx";
+import calcPriceUnitHelper from "../helpers/calcPriceUnitHelper.js";
+import calcSubtotal from "../helpers/calcSubtotal.js";
+import calcTotal from "../helpers/calcTotal.js";
 
 
 function Form() {
@@ -41,9 +43,12 @@ function Form() {
         console.log(products)
     }, [products]);
 
+    let idCounter = 1;
+
     // HIER NOG KEY MEEGEVEN
     const addProduct = () => {
         const newProduct = {
+            key: idCounter++,
             name: productName,
             amount: amount,
             vat: vat,
@@ -59,6 +64,8 @@ function Form() {
         setVat(21);
         setPrice(0);
     }
+
+    // const total = calcTotal(products);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -215,7 +222,7 @@ function Form() {
                             name="vat"
                             id="vat"
                             value={vat}
-                            onChange={(e) => setVat(e.target.value)}
+                            onChange={(e) => setVat(parseInt(e.target.value))}
                         >
                             <option value="21">21%</option>
                             <option value="9">9%</option>
@@ -286,7 +293,7 @@ function Form() {
                                 {products && products.map((product) => {
                                     return (
                                         <>
-                                            <p>{product.priceNoVat * product.amount}</p>
+                                            <p>{(product.priceNoVat * product.amount).toFixed(2)}</p>
                                         </>
                                     )
                                 })}
@@ -297,7 +304,7 @@ function Form() {
                                 {products && products.map((product) => {
                                     return (
                                         <>
-                                            <p>{product.vat}</p>
+                                            <p>{product.vat}%</p>
                                         </>
                                     )
                                 })}
@@ -308,7 +315,7 @@ function Form() {
                                 {products && products.map((product) => {
                                     return (
                                         <>
-                                            <p>{product.price * product.amount}</p>
+                                            <p>€{(product.price * product.amount).toFixed(2)}</p>
                                         </>
                                     )
                                 })}
@@ -320,15 +327,15 @@ function Form() {
                         <div>
                             <section>
                             <p><strong>Subtotaal: </strong></p>
-                            <p>€{}</p>
+                            <p>€{calcSubtotal(products)}</p>
                             </section>
                             <section>
                                 <p><strong>Btw bedrag: </strong></p>
-                                <p>€{(products.price * products.amount) - (products.priceNoVat * products.amount)}</p>
+                                <p>€{(calcTotal(products) - calcSubtotal(products)).toFixed(2)}</p>
                             </section>
                             <section>
                                 <p><strong>Totaal incl. btw: </strong></p>
-                                <p>€{(products.price * products.amount) - (products.priceNoVat * products.amount)}</p>
+                                <p>€{calcTotal(products)}</p>
                             </section>
                         </div>
 

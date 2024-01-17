@@ -2,8 +2,8 @@ import { useState } from 'react'
 
 import './App.css'
 import {Route, Routes} from "react-router-dom";
-import Form from "./Form.jsx";
-import Factuur from "./Factuur.jsx";
+import Form from "./pages/Form.jsx";
+import Factuur from "./pages/Factuur.jsx";
 
 // LOGO UPLOADEN? FACTUURGEGEVENS => naam, adres, GEGEVENS BEDRIJF => naam, adres, telefoonnr, bankrekeningnr, kvk nr, btw nr
 // datum, factuurnummer
