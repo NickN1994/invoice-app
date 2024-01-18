@@ -1,0 +1,43 @@
+.formField {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 500px;
+    margin: 25px 0;
+}
+
+input {
+    max-width: 250px;
+    width: 100%;
+    height: 25px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: #F7FDFF;
+}
+
+input:focus {
+    outline: none;
+    border-bottom: 2px solid #92140C;
+    background: #F7FDFF;
+}
+
+.addProduct {
+    border: 3px solid black;
+    margin: 25px 0;
+}
+
+button {
+    max-width: 200px;
+    width: 100%;
+    height: 35px;
+    border-radius: 10px;
+    background: #FFDCD9;
+    border: 2px solid #92140C;
+
+}
+
+
+.invoice {
+    background: white;
+}

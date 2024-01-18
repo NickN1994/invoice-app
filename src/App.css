@@ -1,11 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;1,700&display=swap');
+
+/*KLEUREN
+#1E1E24 ZWART */
+/*92140C rood */
+/*FFF8F0 wit tint*/
+/*FFDCD9 licht rood*/
+/*E4F9FF licht blauw*/
+
+h1, h2 {
+  font-family: 'Poppins', sans-serif;
+  font-style: italic;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2em;
+
+}
+
+/*h4 {*/
+/*  font-size: 1.5em;*/
+/*}*/
+
+p {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  color: #1E1E24;
+}
+
 .outer-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100vw;
-  border: 1px solid red;
-
+  /*border: 1px solid red;*/
+  /*background: #FFDCD9;*/
+  background: #F8F8F8;
 }
 
 .inner-container {
@@ -16,6 +56,20 @@
   flex-direction: column;
   margin: 75px 40px;
   align-items: center;
-  border: 1px dotted blue;
+  /*border: 1px dotted blue;*/
+  /*background: #FFF8F0;*/
+  background: #F7FDFF;
+  /*background: #E4F9FF;*/
 }
 
+.shadow {
+  box-shadow: 0px 0px 33px 2px rgba(0,0,0,0.8);
+}
+
+.invoiceInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  max-width: 1400px;
+  width: 100%;
+}

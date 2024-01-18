@@ -1,8 +1,11 @@
+import "./Formfield.css"
+
+
 function Formfield ({labelName, placeholder, type, value, onChange}) {
 
     return (
-        <div>
-            <label htmlFor={labelName}>{labelName}</label>
+        <div className='formField'>
+            <label htmlFor={labelName}><p><strong>{labelName}:</strong></p></label>
             <input
                 type={type}
                 placeholder={placeholder}

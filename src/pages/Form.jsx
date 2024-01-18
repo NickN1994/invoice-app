@@ -65,9 +65,9 @@ function Form() {
     return (
         <>
             <div className='outer-container'>
-                <div className='inner-container'>
+                <div className='inner-container shadow'>
                     <h1>Vul hieronder de gevraagde gegevens in om een factuur te maken</h1>
-                    <form>
+                    <form className='invoiceInfo'>
                         <div className="companyInfo">
                             <h2>Je bedrijfsgegevens</h2>
                             <Formfield
@@ -186,16 +186,15 @@ function Form() {
                                 onChange={(e) => setCustomerCity(e.target.value)}
                             />
                         </div>
-                        <button onClick={handleSubmit}><Link to="/factuur">Zet gegevens op factuur</Link></button>
                     </form>
                 </div>
             </div>
 
             <div className='outer-container'>
 
-                <div className="inner-container">
-                    <form>
-
+                <div className="inner-container shadow">
+                    <form onClick={handleSubmit} className='addProduct'>
+                        <h2>Voeg hier de producten of diensten toe</h2>
                         <Formfield
                             labelName="Aantal"
                             type="number"
@@ -213,7 +212,7 @@ function Form() {
                         />
 
                         <section>
-                            <label htmlFor="BtwPercentage">Btw percentage</label>
+                            <label htmlFor="BtwPercentage"><p><strong>Btw percentage</strong></p></label>
                             <select
                                 name="vat"
                                 id="vat"
@@ -227,7 +226,7 @@ function Form() {
                         </section>
 
                         <Formfield
-                            labelName="Prijs"
+                            labelName="Prijs in Euro"
                             type="number"
                             placeholder="0"
                             value={price}
@@ -240,7 +239,7 @@ function Form() {
             </div>
 
             <div className='outer-container'>
-                <div className='inner-container'>
+                <div className='inner-container invoice'>
                     <section>
                         <h3>Factuuradres:</h3>
                         <p>{customerName}</p>
@@ -337,9 +336,8 @@ function Form() {
                     </div>
 
                     <div>
-                        <p><strong>Graag het bedrag overmaken op bankrekeningnummer {bankNumber} en het
-                            factuurnummer erbij
-                            vermelden.</strong></p>
+                        <p><strong>Graag het bedrag overmaken op bankrekeningnummer: {bankNumber} o.v.v. het
+                            factuurnummer. </strong></p>
                     </div>
 
                 </div>
